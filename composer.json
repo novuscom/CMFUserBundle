@@ -1,12 +1,13 @@
 {
-  "name": "novuscom/cmfbundle",
-  "description": "Symfony2 based CMF",
+  "name": "novuscom/cmfuserbundle",
+  "description": "Symfony2 user bundle for Novuscom CMF",
   "type": "symfony-bundle",
   "homepage": "https://github.com/novuscom/CMFBundle",
   "license": "MIT",
   "keywords": [
 	"cmf",
-	"cmf bundle"
+	"cmf bundle",
+	"cmf user bundle"
   ],
   "authors": [
 	{
@@ -35,7 +36,7 @@
 	"predis/predis": "v1.0.1",
 	"stfalcon/tinymce-bundle": "v0.3.8",
 	"helios-ag/fm-elfinder-bundle": "5.0.4",
-	"novuscom/cmfbundlee": "dev-master"
+	"novuscom/cmfbundle": "dev-master"
   },
   "repositories": [
 	{
