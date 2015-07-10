@@ -1,0 +1,56 @@
+{
+  "name": "novuscom/cmfbundle",
+  "description": "Symfony2 based CMF",
+  "type": "symfony-bundle",
+  "homepage": "https://github.com/novuscom/CMFBundle",
+  "license": "MIT",
+  "keywords": [
+	"cmf",
+	"cmf bundle"
+  ],
+  "authors": [
+	{
+	  "name": "Alexander Averichev",
+	  "email": "averichev@yandex.ru"
+	}
+  ],
+  "require": {
+	"php": ">=5.3.9",
+	"symfony/symfony": "2.6.4",
+	"doctrine/orm": "~2.2,>=2.2.3,<2.5",
+	"doctrine/dbal": "<2.5",
+	"doctrine/doctrine-bundle": "~1.4",
+	"gedmo/doctrine-extensions": "2.4.2",
+	"friendsofsymfony/user-bundle": "1.3.6",
+	"knplabs/knp-menu": "2.0.1",
+	"knplabs/knp-menu-bundle": "2.0.0",
+	"whiteoctober/breadcrumbs-bundle": "1.1.0",
+	"apy/breadcrumbtrail-bundle": "1.2",
+	"mopa/bootstrap-bundle": "2.3.1",
+	"twbs/bootstrap": "v3.3.4",
+	"knplabs/knp-paginator-bundle": "2.4.2",
+	"liip/imagine-bundle": "1.3.0",
+	"misd/guzzle-bundle": "v1.1.5",
+	"snc/redis-bundle": "1.1.8",
+	"predis/predis": "v1.0.1",
+	"stfalcon/tinymce-bundle": "v0.3.8",
+	"helios-ag/fm-elfinder-bundle": "5.0.4",
+	"novuscom/cmfbundlee": "dev-master"
+  },
+  "repositories": [
+	{
+	  "type": "vcs",
+	  "url": "https://github.com/novuscom/CMFBundle.git"
+	}
+  ],
+  "autoload": {
+	"psr-4": {
+	  "Novuscom\\CMFBundle\\": ""
+	}
+  },
+  "extra": {
+	"branch-alias": {
+	  "dev-master": "0.0.4.9-dev"
+	}
+  }
+}

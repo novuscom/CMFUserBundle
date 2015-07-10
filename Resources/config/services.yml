@@ -1,0 +1,14 @@
+parameters:
+    cmf_user.mailer.class: Novuscom\CMFUserBundle\Mailer\TwigSwiftMailer
+    cmf_user.mailer.parameters:
+        from_email:
+            confirmation: info@novuscom.ru
+            resetting: info@novuscom.ru
+        template:
+            confirmation: NovuscomCMFUserBundle:Registration:email.txt.twig
+            resetting: NovuscomCMFUserBundle:Registration:email.txt.twig
+
+services:
+    novuscom_user.mailer.twig_swift:
+        class: %cmf_user.mailer.class%
+        arguments: [@mailer, @router, @twig, %cmf_user.mailer.parameters%]
