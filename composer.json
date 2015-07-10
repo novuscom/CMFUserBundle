@@ -46,12 +46,12 @@
   ],
   "autoload": {
 	"psr-4": {
-	  "Novuscom\\CMFBundle\\": ""
+	  "Novuscom\\CMFUserBundle\\": ""
 	}
   },
   "extra": {
 	"branch-alias": {
-	  "dev-master": "0.0.5.3-dev"
+	  "dev-master": "0.0.5.4-dev"
 	}
   }
 }
