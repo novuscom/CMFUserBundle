@@ -36,7 +36,7 @@
 	"predis/predis": "v1.0.1",
 	"stfalcon/tinymce-bundle": "v0.3.8",
 	"helios-ag/fm-elfinder-bundle": "5.0.4",
-	"novuscom/cmfbundle": "0.0.5.7"
+	"novuscom/cmfbundle": "dev-master"
   },
   "repositories": [
 	{
@@ -51,7 +51,7 @@
   },
   "extra": {
 	"branch-alias": {
-	  "dev-master": "0.0.5.7-dev"
+	  "dev-master": "0.0.5.8-dev"
 	}
   }
 }
