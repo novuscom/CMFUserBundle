@@ -138,7 +138,7 @@ class UserController extends Controller
         }
 
         $usr = $this->getUser();
-        if ($usr->getId() != $id and !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if ($usr->getId() != $id && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Доступ запрещен');
         }
 

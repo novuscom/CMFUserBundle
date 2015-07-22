@@ -63,7 +63,7 @@ class RegistrationController extends BaseController
 		if ($form->isValid()) {
 
 			$userAdmin = false;
-			if ($form->has('check') and $form->get('check')->isValid()) {
+			if ($form->has('check') && $form->get('check')->isValid()) {
 				$user->addRole('ROLE_ADMIN');
 				$userAdmin = true;
 			}
@@ -73,7 +73,7 @@ class RegistrationController extends BaseController
 
 			$userManager->updateUser($user);
 
-			if (!$userAdmin and null === $response = $event->getResponse()) {
+			if (!$userAdmin && null === $response = $event->getResponse()) {
 				$url = $this->generateUrl('fos_user_registration_confirmed');
 				$response = new RedirectResponse($url);
 			}
