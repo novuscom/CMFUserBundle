@@ -61,7 +61,7 @@ class RegistrationController extends BaseController
 
 
 		if ($form->isValid()) {
-
+			$user->addRole('ROLE_USER');
 			$userAdmin = false;
 			if ($form->has('check') && $form->get('check')->isValid()) {
 				$user->addRole('ROLE_ADMIN');
@@ -100,6 +100,7 @@ class RegistrationController extends BaseController
 
 		//$this->get('session')->remove('fos_user_send_confirmation_email/email');
 		$user = $this->get('fos_user.user_manager')->findUserByEmail($email);
+		$this->get('security.context')->setToken(null);
 
 		if (null === $user) {
 			throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
@@ -108,5 +109,39 @@ class RegistrationController extends BaseController
 		return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
 			'user' => $user,
 		));
+	}
+	/**
+	 * Receive the confirmation token from user email provider, login the user
+	 */
+	public function confirmAction(Request $request, $token)
+	{
+		/** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+		$userManager = $this->get('fos_user.user_manager');
+
+		$user = $userManager->findUserByConfirmationToken($token);
+
+		if (null === $user) {
+			throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+		}
+
+		/** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+		$dispatcher = $this->get('event_dispatcher');
+
+		$user->setConfirmationToken(null);
+		$user->setEnabled(true);
+
+		$event = new GetResponseUserEvent($user, $request);
+		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
+
+		$userManager->updateUser($user);
+		$this->get('security.context')->setToken(null);
+		if (null === $response = $event->getResponse()) {
+			$url = $this->generateUrl('fos_user_registration_confirmed');
+			$response = new RedirectResponse($url);
+		}
+
+		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
+
+		return $response;
 	}
 }

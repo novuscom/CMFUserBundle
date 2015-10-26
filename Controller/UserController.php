@@ -205,8 +205,9 @@ class UserController extends Controller
                 $entity->setPlainPassword($editForm->get('password')->getData());
 
             }
-            $userManager->updateUser($entity);
 
+            $userManager->updateUser($entity);
+            $userManager->refreshUser($entity);
             return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
         }
 
