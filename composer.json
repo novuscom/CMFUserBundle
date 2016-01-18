@@ -16,7 +16,7 @@
 	}
   ],
   "require": {
-	"novuscom/cmfbundle": ">=0.0.5.9"
+	"novuscom/cmfbundle": "0.0.6.*"
   },
   "repositories": [
 	{
