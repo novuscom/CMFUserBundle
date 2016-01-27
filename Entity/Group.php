@@ -25,10 +25,10 @@ class Group extends BaseGroup
     /**
      * Add sites
      *
-     * @param \Novuscom\CMFBundle\Entity\Site $sites
+     * @param \Novuscom\Bundle\CMFBundle\Entity\Site $sites
      * @return Group
      */
-    public function addSite(\Novuscom\CMFBundle\Entity\Site $sites)
+    public function addSite(\Novuscom\Bundle\CMFBundle\Entity\Site $sites)
     {
         $this->sites[] = $sites;
     
@@ -38,9 +38,9 @@ class Group extends BaseGroup
     /**
      * Remove sites
      *
-     * @param \Novuscom\CMFBundle\Entity\Site $sites
+     * @param \Novuscom\Bundle\CMFBundle\Entity\Site $sites
      */
-    public function removeSite(\Novuscom\CMFBundle\Entity\Site $sites)
+    public function removeSite(\Novuscom\Bundle\CMFBundle\Entity\Site $sites)
     {
         $this->sites->removeElement($sites);
     }

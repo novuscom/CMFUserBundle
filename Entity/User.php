@@ -185,10 +185,10 @@ class User extends BaseUser
     /**
      * Add sites
      *
-     * @param \Novuscom\CMFBundle\Entity\Site $sites
+     * @param \Novuscom\Bundle\CMFBundle\Entity\Site $sites
      * @return User
      */
-    public function addSite(\Novuscom\CMFBundle\Entity\Site $sites)
+    public function addSite(\Novuscom\Bundle\CMFBundle\Entity\Site $sites)
     {
         $this->sites[] = $sites;
     
@@ -198,9 +198,9 @@ class User extends BaseUser
     /**
      * Remove sites
      *
-     * @param \Novuscom\CMFBundle\Entity\Site $sites
+     * @param \Novuscom\Bundle\CMFBundle\Entity\Site $sites
      */
-    public function removeSite(\Novuscom\CMFBundle\Entity\Site $sites)
+    public function removeSite(\Novuscom\Bundle\CMFBundle\Entity\Site $sites)
     {
         $this->sites->removeElement($sites);
     }

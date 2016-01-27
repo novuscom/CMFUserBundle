@@ -40,7 +40,7 @@ Novuscom\CMFUserBundle\Entity\User:
                         referencedColumnName: id
                         onDelete: CASCADE
         sites:
-            targetEntity: Novuscom\CMFBundle\Entity\Site
+            targetEntity: Novuscom\Bundle\CMFBundle\Entity\Site
             joinTable:
                 name: User_Site
                 joinColumns:
