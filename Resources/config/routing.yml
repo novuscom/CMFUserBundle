@@ -1,0 +1,3 @@
+cmf_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: CMFUserBundle:Default:index }

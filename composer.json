@@ -1,0 +1,37 @@
+{
+  "name": "novuscom/cmfuserbundle",
+  "description": "Symfony2 user bundle for Novuscom CMF",
+  "type": "symfony-bundle",
+  "homepage": "https://github.com/novuscom/CMFBundle",
+  "license": "MIT",
+  "keywords": [
+	"cmf",
+	"cmf bundle",
+	"cmf user bundle"
+  ],
+  "authors": [
+	{
+	  "name": "Alexander Averichev",
+	  "email": "averichev@yandex.ru"
+	}
+  ],
+  "require": {
+	"novuscom/cmfbundle": "0.0.7.*"
+  },
+  "repositories": [
+	{
+	  "type": "vcs",
+	  "url": "https://github.com/novuscom/CMFBundle.git"
+	}
+  ],
+  "autoload": {
+	"psr-4": {
+	  "Novuscom\\CMFUserBundle\\": ""
+	}
+  },
+  "extra": {
+	"branch-alias": {
+	  "dev-master": "0.0.6-dev"
+	}
+  }
+}
