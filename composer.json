@@ -16,7 +16,6 @@
 	}
   ],
   "require": {
-	"novuscom/cmfbundle": "0.0.7.*"
   },
   "repositories": [
 	{
