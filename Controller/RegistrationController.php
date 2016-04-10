@@ -12,6 +12,7 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationController extends BaseController
 {
@@ -42,7 +43,7 @@ class RegistrationController extends BaseController
 		$form = $formFactory->createForm();
 
 		if ($userCount==0) {
-			$form->add('check', 'text', array(
+			$form->add('check', TextType::class, array(
 				'label' => 'Пароль к базе данных проекта',
 				'attr' => array(
 					'class' => 'form-control'

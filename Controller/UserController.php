@@ -4,9 +4,10 @@ namespace Novuscom\CMFUserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Novuscom\CMFUserBundle\Entity\User;
 use Novuscom\CMFUserBundle\Form\UserType;
+
 
 /**
  * User controller.
@@ -138,7 +139,7 @@ class UserController extends Controller
         }
 
         $usr = $this->getUser();
-        if ($usr->getId() != $id && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if ($usr->getId() != $id && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Доступ запрещен');
         }
 
@@ -161,19 +162,19 @@ class UserController extends Controller
      */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(UserType::class, $entity, array(
             'action' => $this->generateUrl('admin_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form->remove('enabled');
             $form->remove('roles');
             $form->remove('groups');
             $form->remove('sites');
         }
 
-        $form->add('submit', 'submit', array('label' => 'Сохранить', 'attr' => array(
+        $form->add('submit', SubmitType::class, array('label' => 'Сохранить', 'attr' => array(
             'class' => 'btn btn-success'
         )));
 
@@ -254,7 +255,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Удалить', 'attr' => array(
+            ->add('submit', SubmitType::class, array('label' => 'Удалить', 'attr' => array(
                 'class' => 'btn btn-danger'
             )))
             ->getForm();

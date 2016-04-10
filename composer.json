@@ -16,7 +16,11 @@
 	}
   ],
   "require": {
+<<<<<<< HEAD
 	"novuscom/cmfbundle": "0.0.7.*"
+=======
+	"novuscom/cmfbundle": "0.0.6.*"
+>>>>>>> 3647eb4ecb31973a5fcb6d62e03ca27dc8b99635
   },
   "repositories": [
 	{
@@ -31,7 +35,11 @@
   },
   "extra": {
 	"branch-alias": {
+<<<<<<< HEAD
 	  "dev-master": "0.0.6-dev"
+=======
+	  "dev-master": "0.0.6.2-dev"
+>>>>>>> 3647eb4ecb31973a5fcb6d62e03ca27dc8b99635
 	}
   }
 }
