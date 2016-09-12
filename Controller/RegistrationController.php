@@ -13,16 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegistrationController extends BaseController
 {
 	public function registerAction(Request $request)
 	{
-		/** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
 		$formFactory = $this->get('fos_user.registration.form.factory');
-		/** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
 		$userManager = $this->get('fos_user.user_manager');
-		/** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
 		$dispatcher = $this->get('event_dispatcher');
 
 		$user = $userManager->createUser();
@@ -42,23 +40,22 @@ class RegistrationController extends BaseController
 
 		$form = $formFactory->createForm();
 
-		if ($userCount==0) {
-			$form->add('check', TextType::class, array(
+		if ($userCount == 0) {
+			$form->add('check', PasswordType::class, array(
 				'label' => 'Пароль к базе данных проекта',
 				'attr' => array(
 					'class' => 'form-control'
 				),
 				'mapped' => false,
-				'constraints'=>new Constraints\EqualTo(array(
+				'constraints' => new Constraints\EqualTo(array(
 					'value' => $this->container->getParameter('database_password'),
-					'message'=>'Пароль к базе данных указан неверно'
+					'message' => 'Пароль к базе данных указан неверно'
 				))
 			));
 		}
 
 		$form->setData($user);
 		$form->handleRequest($request);
-
 
 
 		if ($form->isValid()) {
@@ -74,11 +71,8 @@ class RegistrationController extends BaseController
 
 			$userManager->updateUser($user);
 
-			if (!$userAdmin && null === $response = $event->getResponse()) {
-				$url = $this->generateUrl('fos_user_registration_confirmed');
-				$response = new RedirectResponse($url);
-			}
-
+			$url = $this->generateUrl('fos_user_registration_confirmed');
+			$response = new RedirectResponse($url);
 			$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
 			return $response;
@@ -88,6 +82,8 @@ class RegistrationController extends BaseController
 			'form' => $form->createView(),
 		));
 	}
+
+
 	/**
 	 * Tell the user to check his email provider
 	 */
@@ -101,7 +97,7 @@ class RegistrationController extends BaseController
 
 		//$this->get('session')->remove('fos_user_send_confirmation_email/email');
 		$user = $this->get('fos_user.user_manager')->findUserByEmail($email);
-		$this->get('security.context')->setToken(null);
+		$this->container->get('security.token_storage')->setToken(null);
 
 		if (null === $user) {
 			throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
@@ -111,6 +107,7 @@ class RegistrationController extends BaseController
 			'user' => $user,
 		));
 	}
+
 	/**
 	 * Receive the confirmation token from user email provider, login the user
 	 */
@@ -135,7 +132,7 @@ class RegistrationController extends BaseController
 		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
 
 		$userManager->updateUser($user);
-		$this->get('security.context')->setToken(null);
+		$this->container->get('security.token_storage')->setToken(null);
 		if (null === $response = $event->getResponse()) {
 			$url = $this->generateUrl('fos_user_registration_confirmed');
 			$response = new RedirectResponse($url);
